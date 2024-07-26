@@ -42,6 +42,11 @@ const createText = () => {
     untypedfield.textContent = untyped; //untypedfield(untyped)を画面に表示
 };
 
+// タイプカウント用の変数を定義
+let typeCount = 0;
+// タイプ数を表示するHTML要素を取得
+const typeCountDisplay = document.getElementById('typeCountDisplay');
+
 // キー入力の判定
 const keyPress = e => {
     // 誤タイプの場合
@@ -56,6 +61,9 @@ const keyPress = e => {
 
     // 正タイプの判定
     score++; // スコアのインクリメント
+    typeCount++;
+    typeCountDisplay.textContent = typeCount;
+
 
     wrap.classList.remove('mistyped');
     typed += untyped.substring(0, 1);
@@ -136,22 +144,6 @@ start.addEventListener('click', () => {
 
     // キーボードのイベント処理
     document.addEventListener('keypress', keyPress);
-
-    // タイプカウント
-
 });
 
 untypedfield.textContent = 'スタートボタンで開始';
-
-
-// タイプカウント用の変数を定義
-let typeCount = 0;
-// イベント処理
-// keydown:キーをクリックしたとき
-document.addEventListener('keydown', () => {
-    // タイプ数を増やす
-    typeCount++;
-    // typeCountDisplay ID要素へタイプ数を表示
-    // .textContent：ノード内のテキストを文字列で取得
-    document.getElementById('typeCountDisplay').textContent = typeCount;
-});
